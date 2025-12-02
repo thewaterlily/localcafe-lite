@@ -22,6 +22,21 @@ defmodule LocalCafe do
     "#{base}#{path}"
   end
 
+  # Helper function to generate full URLs (for social meta tags)
+  defp full_url(assigns, path) do
+    case Map.get(assigns.site_settings, :domain) do
+      nil -> path
+      domain ->
+        uri = URI.parse(domain)
+        base_path = String.trim_trailing(uri.path || "", "/")
+        clean_path = if String.starts_with?(path, "/"), do: path, else: "/#{path}"
+
+        # Build full URL with scheme and host
+        %URI{uri | path: "#{base_path}#{clean_path}"}
+        |> URI.to_string()
+    end
+  end
+
   def item(assigns) do
     ~H"""
     <.layout site_settings={@site_settings} locations={@locations} title={@item.title}>
@@ -121,10 +136,8 @@ defmodule LocalCafe do
         <%!-- OpenGraph meta tags --%>
         <meta property="og:title" content={"#{@title} | #{@site_settings.site_name}"} />
         <meta property="og:description" content={@site_settings.description} />
-        <meta
-          property="og:image"
-          content={if @site_settings.domain, do: "#{@site_settings.domain}#{@site_settings.image}", else: @site_settings.image}
-        />
+        <meta property="og:image" content={full_url(assigns, @site_settings.image)} />
+        <meta property="og:url" content={@site_settings.domain} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={@site_settings.site_name} />
 
@@ -132,10 +145,7 @@ defmodule LocalCafe do
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={"#{@title} | #{@site_settings.site_name}"} />
         <meta name="twitter:description" content={@site_settings.description} />
-        <meta
-          name="twitter:image"
-          content={if @site_settings.domain, do: "#{@site_settings.domain}#{@site_settings.image}", else: @site_settings.image}
-        />
+        <meta name="twitter:image" content={full_url(assigns, @site_settings.image)} />
 
         <link rel="stylesheet" href={path(assigns, "/assets/css/app.css")} />
         <script defer src={path(assigns, "/assets/js/app.js")}></script>

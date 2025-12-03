@@ -1,8 +1,8 @@
-defmodule LocalCafe.Location do
-  alias LocalCafe.Location.Item
+defmodule LocalCafe.Locations do
+  alias LocalCafe.Locations.Location
 
   use NimblePublisher,
-    build: Item,
+    build: Location,
     from: Application.app_dir(:local_cafe, "priv/locations/**/*.md"),
     as: :locations
 

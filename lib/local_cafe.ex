@@ -5,7 +5,7 @@ defmodule LocalCafe do
   alias LocalCafe.Menu
   alias LocalCafe.Specials
   alias LocalCafe.Site
-  alias LocalCafe.Location
+  alias LocalCafe.Locations
 
   embed_templates("templates/*")
 
@@ -15,7 +15,7 @@ defmodule LocalCafe do
     items = Menu.all_items()
     specials = Specials.all_items()
     tags = Menu.all_tags()
-    locations = Location.all_locations()
+    locations = Locations.all_locations()
 
     render_file(
       "index.html",

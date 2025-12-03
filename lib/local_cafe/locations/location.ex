@@ -1,4 +1,4 @@
-defmodule LocalCafe.Location.Item do
+defmodule LocalCafe.Locations.Location do
   @enforce_keys [:name, :body, :street, :city_state, :phone, :email, :hours]
   defstruct [:name, :body, :street, :city_state, :phone, :email, :hours, :latitude, :longitude]
 
@@ -26,7 +26,8 @@ defmodule LocalCafe.Location.Item do
   end
 
   defp fetch_coordinates(address) do
-    url = "https://nominatim.openstreetmap.org/search?q=#{URI.encode(address)}&format=json&limit=1"
+    url =
+      "https://nominatim.openstreetmap.org/search?q=#{URI.encode(address)}&format=json&limit=1"
 
     # Use User-Agent as required by Nominatim usage policy
     headers = [{~c"user-agent", ~c"LocalCafe Static Site Generator"}]

@@ -16,16 +16,63 @@
 
   .specials-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
     gap: var(--space-6);
     padding: var(--space-6);
     max-width: var(--container-xl);
     margin-inline: auto;
+    /* Default: 3 columns for 3+ items */
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  }
+
+  /* When there are exactly 2 specials: 2 columns */
+  .special-card:nth-last-child(2):first-child,
+  .special-card:nth-last-child(2):first-child ~ .special-card {
+    grid-column: span 1;
+  }
+
+  .specials-grid:has(.special-card:nth-last-child(2):first-child) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* When there is only 1 special: full width horizontal layout */
+  .special-card:only-child {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    gap: var(--space-6);
+  }
+
+  /* Image container - first column, spans all rows */
+  .special-card:only-child > a {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    display: block;
+  }
+
+  .special-card:only-child > a .menu-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    min-height: 400px;
+  }
+
+  /* Header - second column, first row */
+  .special-card:only-child > .menu-card-header {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  /* Description - second column, second row */
+  .special-card:only-child > .menu-card-description {
+    grid-column: 2;
+    grid-row: 2;
   }
 
   .special-card {
-    border: 2px solid var(--color-accent);
+    border: 1px solid var(--color-border);
     position: relative;
+    transition: border-color 0.2s ease;
   }
 
   .special-card::before {
@@ -45,8 +92,21 @@
   }
 
   @media (max-width: 768px) {
+    /* Mobile: always single column */
     .specials-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr !important;
+    }
+
+    /* Single special on mobile: stack vertically using flex-column */
+    .special-card:only-child {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .special-card:only-child > a .menu-card-image {
+      height: auto;
+      max-height: 300px;
+      min-height: auto;
     }
   }
 }

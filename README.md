@@ -43,6 +43,12 @@ It creates a professional website that can cost nothing to host and are easy to 
 - Links shared on Facebook, Twitter, Instagram show rich previews
 - Displays your photo and description automatically
 
+### Social Media Links
+- Display social media icons in the footer
+- Links to your Instagram, Facebook, X (Twitter), and more
+- Simple configuration with platform and URL
+- Available platforms: bluesky, doordash, facebook, github, instagram, tiktok, ubereats, x, yelp
+
 ---
 
 ## Configuration
@@ -59,7 +65,12 @@ Edit `priv/home.md` to configure your site:
   logo: "/images/logo.png",               # Optional: Logo in navigation
   hero: ["Main headline", "Subheading"],   # Hero text lines
   hero_image: ["/images/hero_1.jpg"],      # Single image or list
-  domain: "https://yourcafe.com"          # Full URL including path for GitHub Pages
+  domain: "https://yourcafe.com",         # Full URL including path for GitHub Pages
+  social_links: [                         # Optional: Social media links
+    instagram: "https://instagram.com/yourcafe",
+    facebook: "https://facebook.com/yourcafe",
+    x: "https://x.com/yourcafe"
+  ]
 }
 ```
 
@@ -68,6 +79,12 @@ Edit `priv/home.md` to configure your site:
 - For GitHub Pages subdirectory: `domain: "https://username.github.io/repo-name"`
 
 The path from the domain is automatically used for all internal links.
+
+**Note on `social_links`:**
+- Optional field - footer displays icons only if configured
+- Available platforms: `bluesky`, `doordash`, `facebook`, `github`, `instagram`, `tiktok`, `ubereats`, `x`, `yelp`
+- Icons appear in the footer above the copyright text
+- Each link opens in a new tab
 
 ### Menu Items
 Create markdown files in `priv/menu/`. File name becomes URL path.
@@ -249,7 +266,11 @@ Generated site is in `priv/output/`. Upload this folder to:
      image: "/images/preview.jpg",
      hero: ["Welcome message here"],
      hero_image: ["/images/hero_1.jpg"],
-     domain: "https://yourcafe.com"
+     domain: "https://yourcafe.com",
+     social_links: [  # Optional
+       instagram: "https://instagram.com/yourcafe",
+       facebook: "https://facebook.com/yourcafe"
+     ]
    }
    ```
 

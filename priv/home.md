@@ -19,6 +19,10 @@
 #   hero_image - a list of images relative to the domain for use in the slide show on the home page
 #
 #   domain - the site's main url.
+#
+#   social_links - A list of social media profiles to display as icons in the footer.
+#   Available icons: bluesky, doordash, facebook, github, instagram, tiktok, ubereats, x, yelp
+#   Format: [platform: "url", ...]
 
 
 %{
@@ -29,7 +33,12 @@
   logo: "/images/example-logo.png",
   hero: ["Example hero text line 1", "Examle Hero text line 2"],
   hero_image: ["/images/example-hero.png"],
-  domain: "https://lite.localcafe.org/"
+  domain: "https://lite.localcafe.org/",
+  social_links: [
+    instagram: "https://instagram.com/example",
+    facebook: "https://facebook.com/example",
+    x: "https://x.com/example"
+  ]
 }
 ---
 

@@ -23,11 +23,11 @@ It creates a professional website that can cost nothing to host and are easy to 
 - Customers filter by tags (vegetarian, gluten-free, breakfast, lunch)
 - Update by editing simple text files
 
-### Location & Maps
+### Locations
 - Show one location or multiple locations
-- Automatic maps - just provide your address
+- Optional images for each location (storefront photos, maps, etc.)
 - Each location has its own hours, phone, and email
-- Maps adjust to any screen size
+- Responsive layout adapts to screen size
 
 ### Photo Slideshow
 - Homepage displays rotating photos with smooth transitions
@@ -177,12 +177,11 @@ Create markdown files in `priv/locations/`. Coordinates fetched automatically.
 Visit us in the heart of downtown!
 ```
 
-To skip the map, add coordinates manually:
+To add an image for the location:
 ```elixir
 %{
   # ... other fields ...
-  latitude: "45.5050932",
-  longitude: "-122.6445551"
+  image: "/images/storefront.jpg"
 }
 ```
 
@@ -344,7 +343,7 @@ local_cafe_lite/
 │       │   └── item.ex   # Menu item struct
 │       ├── location.ex   # Location module
 │       ├── location/
-│       │   └── item.ex   # Location struct with geocoding
+│       │   └── item.ex   # Location struct
 │       ├── site.ex       # Site settings module
 │       └── home.ex       # Home page struct
 ├── priv/

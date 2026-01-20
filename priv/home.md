@@ -26,7 +26,7 @@
 
 
 %{
-  site_name: "LocalCafe.org test",
+  site_name: "LocalCafe.org tests",
   title: "Home",
   description: "A static site generator for local restaurants and cafes",
   image: "/images/example-logo.png",
